@@ -15,7 +15,7 @@ function setup() {
     for(let j = 0; j < 3; j++){
       if((i + j) % 2 == 1){
         fill(255, 0, 0);
-        circle(size * i + size / 2, size * j + size / 2 , size - 5);
+        ellipse(size * i + size / 2, size * j + size / 2 , size - 5, size - 5);
       }
     }
   }
@@ -23,7 +23,7 @@ function setup() {
     for(let j = 5; j < 8; j++){
       if((i + j) % 2 == 1){
         fill(0);
-        circle(size * i + size / 2, size * j + size / 2 , size - 5);
+        ellipse(size * i + size / 2, size * j + size / 2 , size - 5, size - 5);
       }
     }
   }
