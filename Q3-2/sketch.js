@@ -25,27 +25,47 @@ function draw(){
   rect(0, groundY, width, height - groundY);
 
   // BLANK[1] キャラクターの左右移動
-  if(keyIsDown(LEFT_ARROW)){x -= 5;}
-  if(keyIsDown(RIGHT_ARROW)){x += 5;}
-  if(keyIsDown("B".charCodeAt(0))){
-    if(keyIsDown(LEFT_ARROW)){vx -= 1;}
-    if(keyIsDown(RIGHT_ARROW)){vx += 1;}
-  }else{
+  //if(y == groundY - size / 2){
+   if(keyIsDown(LEFT_ARROW)){x -= 5;}
+   if(keyIsDown(RIGHT_ARROW)){x += 5;}
+   if(keyIsDown("B".charCodeAt(0))){
+     if(keyIsDown(LEFT_ARROW)){vx -= 1;}
+     if(keyIsDown(RIGHT_ARROW)){vx += 1;}
+   }else{
     vx = 0;
-  }
+   }
+  //}
 
   // BLANK[2] 重力とジャンプ
-  //if(keyPressed(" ".charCodeAt(0))){vy = -10;}
+  if(y < groundY - size / 2){
+    vy += g;
+  }
+  if(y == groundY - size / 2 && vy > 0){
+    vy = 0;
+    y = groundY - size / 2;
+  }
 
   // 速くなりすぎないように制限
   vx = constrain(vx, -20, 20);
   vy = constrain(vy, -20, 20);
 
   // 位置を更新
+  //if(y < groundY - size / 2){
+  //  vx = 0;
+  //}
+  //if(y == groundY - size / 2){
+  //  x += vx;
+  //}
   x += vx;
   y += vy;
 
   // キャラクターを描く
   fill(0);
   ellipse(x, y, size, size);
+}
+
+function keyPressed(){
+  if(key == " " && y == height * 0.8 - height * 0.05){
+    vy = -20;
+  }
 }
