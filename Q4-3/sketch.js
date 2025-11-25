@@ -49,7 +49,7 @@ function draw(){
 
   if(frameCount % 20 === 0) { // 20フレームごとに新しい的を追加する
     // BLANK[1] 新しい的オブジェクトを作成して targets 配列に追加しよう
-    const t = { x: width / 2, y: height / 2, size: 10, vx: random(-2, 2), vy: random(-2, 2)};
+    const t = { x: width / 2, y: height / 2, size: 10, vx: random(-10, 10), vy: random(-10, 10)};
     targets.push(t);
   }
 
@@ -62,7 +62,9 @@ function draw(){
       for(let j = 0; j < balls.length; j++){ // すべてのボールと衝突判定
         let b = balls[j];
         // BLANK[2]
-        if((((b.x - t.x) ^ 2 + (b.y - t.y) ^ 2) ^ (1 / 2)) < (b.size + t.size)){
+        let d = dist(b.x, b.y, t.x, t.y);
+        //d = ((b.x - t.x) ^ 2 + (b.y - t.y) ^ 2) ^ (1 / 2) だとうまくいかない…
+        if(d < (b.size / 2 + t.size / 2)){
           hit = true;
         }
       }
