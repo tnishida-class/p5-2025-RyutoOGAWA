@@ -1,7 +1,7 @@
 // カレンダーを描画しよう
 function setup(){
   createCanvas(200, 200);
-  drawCalendar(2025, 10);
+  drawCalendar(2025, 11);
 }
 
 function drawCalendar(y, m){
@@ -13,8 +13,20 @@ function drawCalendar(y, m){
   }
 
   let dow = dayOfWeek(y, m, 1);
+  let numberOfWeek = 1;
   for(let d = 1; d <= daysInMonth(y, m); d++){
     // BLANK[3] まずは daysInYear, dayOfWeek を作ろう
+    if((d + dow - 1) % 7 == 0){
+      numberOfWeek += 1;
+      stroke(255, 0, 0);
+    }else if((d + dow - 1) % 7 == 6){
+      stroke(0, 0, 255);
+    }else{
+      stroke(255);
+    }
+    const x = (d + dow - 1) % 7 * width / 7;
+    const y = 20 * (numberOfWeek + 1);
+    text(d, x, y);
   }
 }
 
@@ -24,6 +36,7 @@ function isLeapYear(y){
 
 function daysInYear(y){
   // BLANK[1] hint: 閏年なら366日、そうでなければ365日
+  return isLeapYear(y) ? 366 : 365;
 }
 
 function daysInMonth(y, m){
@@ -48,6 +61,12 @@ function dayOfYear(y, m, d){
 
 function dayOfWeek(y, m, d){
   // BLANK[2] hint: 曜日がわかる日からの経過日数を求め7の剰余を取る　たとえば1970年1月1日木曜日
+  let count = 4;
+  for(let i = 1970; i < y; i++){
+    count += daysInYear(i);
+  }
+  count = count + dayOfYear(y, m, d) - 1
+  return count % 7
 }
 
 function dayOfWeekAsString(dow){
