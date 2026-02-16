@@ -50,6 +50,7 @@ function setup(){
   const n = 20;
   for(let i = 3; i < 8; i++){line(0, height * i / n, width, height * i / n);}
   for(let i = 13; i < 18; i++){line(0, height * i / n, width, height * i / n);}
+  line(width - 20, height * 3 / n, width - 20, height * 7 / n);
   
   //noStroke();
 
@@ -88,10 +89,6 @@ function setup(){
       lengthSumB += length[i];
     }
   }
-}
-
-function draw(){
-  //background(160, 192, 255);
 }
 
 function windowResized(){
